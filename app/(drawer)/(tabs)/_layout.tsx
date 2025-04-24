@@ -1,6 +1,8 @@
 import { Tabs } from 'expo-router';
+import { Image } from 'react-native';
 
 import { TabBarIcon } from '~/components/TabBarIcon';
+import { HomeIcon, SearchBarIcon } from '~/constants/icons';
 
 export default function TabLayout() {
   return (
@@ -13,15 +15,18 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: '',
+          tabBarShowLabel: false,
+
+          tabBarIcon: ({ color }) => <Image source={HomeIcon} />,
         }}
       />
       <Tabs.Screen
         name="two"
         options={{
           title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarShowLabel: false,
+          tabBarIcon: ({ color }) => <Image source={SearchBarIcon} />,
         }}
       />
     </Tabs>
