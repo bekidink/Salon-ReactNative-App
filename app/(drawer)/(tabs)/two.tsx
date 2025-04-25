@@ -1,36 +1,65 @@
-import { Stack } from 'expo-router';
-
-import { Container } from '~/components/Container';
-import { ScreenContent } from '~/components/ScreenContent';
-import React, { useRef, useMemo, useCallback } from 'react';
-import { View, Text, TextInput, FlatList, TouchableOpacity, Image, Dimensions } from 'react-native';
-import MapView from 'react-native-maps';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+  Alert,
+} from 'react-native';
+import MapView, { Marker, Region } from 'react-native-maps';
 import { AntDesign } from '@expo/vector-icons';
 import BottomSheet from '@gorhom/bottom-sheet';
+import * as Location from 'expo-location';
 import { ServiceData } from '~/utils/data';
-
+import { StyleSheet } from 'react-native';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { router } from 'expo-router';
 const { width } = Dimensions.get('window');
+
 export default function Home() {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const snapPoints = useMemo(() => ['25%', '50%'], []);
 
+  const [region, setRegion] = useState<Region | null>(null);
+
   const handlePresentModal = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert(
+          'Permission denied',
+          'Location access is needed to show your position on the map.'
+        );
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setRegion({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.015,
+        longitudeDelta: 0.0121,
+      });
+    })();
+  }, []);
+
   return (
     <View style={{ flex: 1 }}>
-      <MapView
-        // style={{ ...StyleSheet.absoluteFillObject }}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      {region && (
+        <MapView style={StyleSheet.absoluteFillObject} region={region} showsUserLocation={true} />
+      )}
 
       {/* Search Input */}
-      <View style={{ position: 'absolute', top: 50, left: 20, right: 20 }}>
+      <View
+        // style={{ position: 'absolute', top: 50, left: 20, right: 20 }}
+        className=" absolute top-70  left-20 right-20 flex flex-row items-center gap-x-8 mt-10">
         <TextInput
           placeholder="Search services or salons..."
           style={{
@@ -44,6 +73,9 @@ export default function Home() {
             elevation: 5,
           }}
         />
+        <TouchableOpacity className="rounded-full bg-white p-2" onPress={()=>router.push('/search')}>
+          <Ionicons name="filter" size={32} color="black" />
+        </TouchableOpacity>
       </View>
 
       {/* Horizontal Scroll for Services */}
@@ -55,12 +87,8 @@ export default function Home() {
           contentContainerStyle={{ paddingHorizontal: 16 }}
           keyExtractor={(item) => item.title}
           renderItem={({ item }) => (
-            <TouchableOpacity style={{ alignItems: 'center', marginRight: 16 }}>
-              <Image
-                source={item.icon}
-                style={{ width: 50, height: 50, borderRadius: 25, marginBottom: 4 }}
-              />
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>{item.title}</Text>
+            <TouchableOpacity className="bg-tertiary mx-4 rounded-full p-1">
+              <Text className="">{item.title}</Text>
             </TouchableOpacity>
           )}
         />
@@ -71,17 +99,18 @@ export default function Home() {
         onPress={handlePresentModal}
         style={{
           position: 'absolute',
-          alignSelf: 'center',
-          top: '50%',
+          alignSelf: 'start',
+          top: '70%',
           marginTop: -30,
-          backgroundColor: '#F98600',
+          backgroundColor: '#156778',
           borderRadius: 30,
           width: 60,
           height: 60,
           justifyContent: 'center',
           alignItems: 'center',
           elevation: 5,
-        }}>
+        }}
+        >
         <AntDesign name="enviroment" size={28} color="white" />
       </TouchableOpacity>
 
@@ -89,7 +118,6 @@ export default function Home() {
       <BottomSheet ref={bottomSheetRef} index={-1} snapPoints={snapPoints}>
         <View style={{ padding: 16 }}>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>Nearby Salons</Text>
-          {/* Example content */}
           <Text>Salon A</Text>
           <Text>Salon B</Text>
         </View>
@@ -120,13 +148,3 @@ export default function Home() {
     </View>
   );
 }
-
-const StyleSheet = {
-  absoluteFillObject: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-};

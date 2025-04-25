@@ -23,12 +23,12 @@ export default function OnboardingScreen() {
       scrollViewRef.current?.scrollTo({ x: width * nextPage, animated: true });
       setCurrentPage(nextPage);
     } else {
-    //   router.replace('/auth/sing-up');
+    router.replace('/(drawer)');
     }
   };
 
   const skipOnboarding = () => {
-    // router.replace('/auth/sign-in');
+    router.replace('/(drawer)');
   };
 
   const handleScroll = (event: any) => {

@@ -131,7 +131,7 @@ export default function Home() {
           contentContainerStyle={{ gap: 12 }}
           keyExtractor={(item, i) => i.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity className=" flex flex-row gap-x-4 ">
+            <TouchableOpacity className=" flex flex-row gap-x-4 shadow-xl">
               <View className="">
                 <Image source={item.img} className="h-36 w-32 rounded-md" resizeMode="cover" />
               </View>
