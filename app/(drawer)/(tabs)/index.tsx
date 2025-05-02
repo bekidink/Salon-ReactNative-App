@@ -17,7 +17,7 @@ export default function Home() {
           <Text className="text-2xl font-bold">Hello, Samantha</Text>
           <Text>Find the service you want, and treat yourself</Text>
         </View>
-        <View className="bg-primary items-center justify-center rounded-full px-3 ">
+        <View className="items-center justify-center rounded-full bg-primary px-3 ">
           <Image source={SearchIcon} />
         </View>
       </View>
@@ -33,11 +33,11 @@ export default function Home() {
               className="m-1 flex-1 items-center rounded-lg bg-white p-2"
               style={{ maxWidth: '23%' }}
               onPress={() => router.push(`/services/${item.title}` as never)}>
-              <View className="bg-tertiary rounded-full p-2">
+              <View className="rounded-full bg-tertiary p-2">
                 <Image source={item.icon} className="h-12 w-12 rounded-full" resizeMode="contain" />
               </View>
 
-              <Text className="text-primary mt-2 text-center text-lg font-medium">
+              <Text className="mt-2 text-center text-lg font-medium text-primary">
                 {item.title}
               </Text>
             </TouchableOpacity>
@@ -66,7 +66,7 @@ export default function Home() {
         <View className="my-3 flex flex-row items-center justify-between">
           <Text className="text-xl font-bold">Featured Salon</Text>
           <TouchableOpacity>
-            <Text className="text-primary font-semibold">View All</Text>
+            <Text className="font-semibold text-primary">View All</Text>
           </TouchableOpacity>
         </View>
         <FlatList
@@ -76,7 +76,9 @@ export default function Home() {
           contentContainerStyle={{ gap: 12 }}
           keyExtractor={(item, i) => i.toString()}
           renderItem={({ item }) => (
-            <TouchableOpacity className=" flex-1  ">
+            <TouchableOpacity
+              className=" flex-1  "
+              onPress={() => router.push(`/shop/${item.title}` as never)}>
               <View className="">
                 <Image source={item.img} className="h-56 w-52 rounded-md" resizeMode="cover" />
               </View>
@@ -104,13 +106,13 @@ export default function Home() {
           horizontal
           renderItem={({ item }) => (
             <TouchableOpacity
-              className="bg-tertiary m-1 flex flex-row items-center rounded-lg p-2"
+              className="m-1 flex flex-row items-center rounded-lg bg-tertiary p-2"
               onPress={() => router.push(`/services/${item.title}` as never)}>
-              <View className="bg-tertiary rounded-full p-2">
+              <View className="rounded-full bg-tertiary p-2">
                 <Image source={item.icon} className="h-12 w-12 rounded-full" resizeMode="contain" />
               </View>
 
-              <Text className="text-primary mt-2 text-center text-lg font-medium">
+              <Text className="mt-2 text-center text-lg font-medium text-primary">
                 {item.title}
               </Text>
             </TouchableOpacity>
@@ -121,7 +123,7 @@ export default function Home() {
         <View className="my-3 flex flex-row items-center justify-between">
           <Text className="text-xl font-bold">Nearby Offers</Text>
           <TouchableOpacity>
-            <Text className="text-primary font-semibold">View All</Text>
+            <Text className="font-semibold text-primary">View All</Text>
           </TouchableOpacity>
         </View>
         <FlatList
@@ -135,10 +137,10 @@ export default function Home() {
               <View className="">
                 <Image source={item.img} className="h-36 w-32 rounded-md" resizeMode="cover" />
               </View>
-              <View className='gap-y-2'>
+              <View className="gap-y-2">
                 <View className="mt-2 flex flex-row gap-x-2">
                   {item.services.map((service) => (
-                    <Text className="text-primary items-center">.{service}</Text>
+                    <Text className="items-center text-primary">.{service}</Text>
                   ))}
                 </View>
                 <Text className="text-lg font-bold">{item.title}</Text>

@@ -14,7 +14,9 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="onboarding" options={{ headerShown: false }} />
         <Stack.Screen name="search" options={{ headerShown: false }} />
+        <Stack.Screen name="shop" options={{ headerShown: false }} />
         <Stack.Screen name="services" options={{ headerShown: false }} />
+        <Stack.Screen name="chat" options={{ headerShown: false }} />
         <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ title: 'Modal', presentation: 'modal' }} />
       </Stack>

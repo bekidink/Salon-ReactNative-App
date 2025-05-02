@@ -22,6 +22,7 @@ const DrawerLayout = () => {
         options={{
           headerTitle: 'Tabs',
           drawerLabel: 'Tabs',
+          headerShown:false,
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="border-bottom" size={size} color={color} />
           ),
