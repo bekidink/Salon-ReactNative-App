@@ -7,7 +7,18 @@ import {
   SpaIcon,
   WaxIcon,
 } from '~/constants/icons';
-import { Featuredbg1, Featuredbg2, FollowBg1, Followbg2, FollowBg3, FollowBg4 } from '~/constants/images';
+import {
+  BluntHairBg,
+  BobHairBg,
+  Featuredbg1,
+  Featuredbg2,
+  FollowBg1,
+  Followbg2,
+  FollowBg3,
+  FollowBg4,
+  MediumHairBg,
+  VShapedHairBg,
+} from '~/constants/images';
 
 export const ServiceData = [
   {
@@ -75,5 +86,36 @@ export const FeaturedData = [
     rating: 4.7,
     ratingCount: 2740,
     location: '2607  Haymond Rocks ..',
+  },
+];
+
+export const ServicesData = [
+  {
+    title: 'Woman Blunt Cut',
+    img: BluntHairBg,
+    price: 50,
+    duration: '2 hours',
+    description: "A blunt cut bob is a shorter hairstyle that's c..",
+  },
+  {
+    title: 'Bob/ Lob Cut',
+    img: BobHairBg,
+    price: 55,
+    duration: '1.5 hours',
+    description: "A blunt cut bob is a shorter hairstyle that's c..",
+  },
+  {
+    title: 'Medium Length Layer Cut',
+    img: MediumHairBg,
+    price: 80,
+    duration: '1 hours',
+    description: 'Layered hair is a hairstyle that gives the illusion of..',
+  },
+  {
+    title: 'V-Shaped Cut',
+    img: VShapedHairBg,
+    price: 90,
+    duration: '2.5 hours',
+    description: 'There are a lot of variations between v-sh..',
   },
 ];

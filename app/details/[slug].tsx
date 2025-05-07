@@ -142,7 +142,7 @@ export default function PlushBeautyScreen() {
                   onPress={() => setSelectedService(item.title)}
                   className="flex flex-row gap-x-4 shadow-xl">
                   <Image source={item.img} className="h-36 w-32 rounded-md" resizeMode="cover" />
-                  <View className="flex-1 gap-y-2 pr-4">
+                  <View className="flex-1  gap-y-2 pr-4">
                     <View className="mt-2 flex flex-row flex-wrap gap-2">
                       {item.services.map((service, i) => (
                         <Text key={i} className="text-primary">
@@ -150,9 +150,14 @@ export default function PlushBeautyScreen() {
                         </Text>
                       ))}
                     </View>
-                    <Text className="text-lg font-bold">
-                      {item.title} {isSelected ? '-' : '+'}
-                    </Text>
+                    <View className="flex-row items-center justify-between">
+                      <Text className="text-lg font-bold">{item.title}</Text>
+                      <View
+                        className={`h-6 w-6 items-center border rounded-full${!isSelected ? '  bg-primary' : 'border-red-400 bg-none'}`}>
+                        <Text className={``}>{isSelected ? '-' : '+'}</Text>
+                      </View>
+                    </View>
+
                     <Text className="truncate">{item.location}</Text>
                     <View className="flex flex-row items-center gap-x-2">
                       <AntDesign name="star" size={24} color="#F98600" />
@@ -255,7 +260,7 @@ export default function PlushBeautyScreen() {
         <View className="flex-row items-center justify-between">
           <View>
             <Text className="text-lg font-semibold text-gray-800">
-              Total:<Text className="font-normal"> (1 services) </Text>{' '}
+              Total<Text className="font-normal"> (1 services) </Text>{' '}
             </Text>
             <Text className="text-lg font-semibold text-gray-800">
               $40 <Text className="text-sm font-normal line-through">$10</Text>

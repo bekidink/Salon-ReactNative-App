@@ -50,30 +50,26 @@ const NotificationsScreen = () => {
   const currentData = activeTab === 'Message' ? messages : notifications;
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50">
+    <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="dark" />
 
-      {/* Header */}
-      <View className="mt-10 flex-row items-center justify-between border-b border-gray-200 bg-white px-6 py-4">
-        <Text className="text-xl font-bold">Messages</Text>
-      </View>
-
-      {/* Tabs */}
-      <View className="flex-row border-b border-gray-200 bg-white">
-        <Pressable
-          onPress={() => setActiveTab('Message')}
-          className={`flex-1 items-center py-3 ${activeTab === 'Message' ? 'border-b-2 border-black' : ''}`}>
+      <View className="mt-10 flex-row border-b border-gray-200 bg-white">
+        <Pressable onPress={() => setActiveTab('Message')} className={`flex-1 items-center py-3 `}>
           <Text className={`text-base ${activeTab === 'Message' ? 'font-bold' : 'text-gray-500'}`}>
             Message
           </Text>
+          {activeTab === 'Message' && <View className="h-2 w-2 rounded-full bg-primary"></View>}
         </Pressable>
         <Pressable
           onPress={() => setActiveTab('Notification')}
-          className={`flex-1 items-center py-3 ${activeTab === 'Notification' ? 'border-b-2 border-black' : ''}`}>
+          className={`flex-1 items-center py-3 `}>
           <Text
             className={`text-base ${activeTab === 'Notification' ? 'font-bold' : 'text-gray-500'}`}>
             Notification
           </Text>
+          {activeTab === 'Notification' && (
+            <View className="h-2 w-2 rounded-full bg-primary"></View>
+          )}
         </Pressable>
       </View>
 

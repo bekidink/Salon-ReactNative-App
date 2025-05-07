@@ -13,6 +13,7 @@ import {
 import { Calendar } from 'react-native-calendars';
 import { BlurView } from 'expo-blur';
 import { Feather } from '@expo/vector-icons';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 export default function BookingService() {
   const [services, setServices] = useState([
     {
@@ -43,7 +44,7 @@ export default function BookingService() {
 const [selectedId, setSelectedId] = useState<number>();
   const dates = ['Wed 9', 'Thu 10', 'Fri 11', 'Sat 12', 'Sun 13', 'Mon 14'];
   const times = ['08:00 AM', '10:00 AM', '11:00 AM', '01:00 PM'];
-
+const { slug } = useLocalSearchParams<{ slug: string }>();
   const removeService = (id: any) => {
     setServices(services.filter((service) => service.id !== id));
   };
@@ -52,6 +53,7 @@ const [selectedId, setSelectedId] = useState<number>();
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="p-4">
         {/* Services Section */}
+        <Stack.Screen options={{title:"Booking Service"}}/>
         <View className="flex flex-row justify-between">
           <Text className="mb-2 text-lg font-semibold">Your Services Order</Text>
           <TouchableOpacity className="mb-2 flex-row items-center justify-between rounded-lg  p-2">
@@ -156,13 +158,13 @@ const [selectedId, setSelectedId] = useState<number>();
 
         {/* Total and Checkout */}
       </ScrollView>
-      <View className=" flex flex-row justify-between absolute bottom-14 left-0 right-0 border-t border-gray-200 bg-white p-2 px-4">
+      <View className=" flex flex-row justify-between absolute bottom-20 left-0 right-0 border-t border-gray-200 bg-white p-2 px-4">
         {' '}
         <View className="  flex-column ">
-          <Text className="text-lg font-semibold">Total [1 Service]</Text>
-          <Text className="text-lg font-semibold">$40 $40</Text>
+          <Text className="text-lg font-semibold">Total (1 Service)</Text>
+          <Text className="text-lg font-semibold">$40 <Text className='line-through text-sm font-normal'>$10</Text></Text>
         </View>
-        <TouchableOpacity className="mb-4 rounded-lg bg-blue-500 p-3">
+        <TouchableOpacity className="mb-4 rounded-lg bg-primary p-3" onPress={()=>router.push(`/checkout/${slug}`)}>
           <Text className="text-center font-semibold text-white">Checkout</Text>
         </TouchableOpacity>
       </View>
