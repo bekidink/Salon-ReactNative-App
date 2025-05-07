@@ -8,21 +8,11 @@ const DrawerLayout = () => {
   return (
     <Drawer>
       <Drawer.Screen
-        name="index"
-        options={{
-          headerTitle: 'Home',
-          drawerLabel: 'Home',
-          drawerIcon: ({ size, color }) => (
-            <Ionicons name="home-outline" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
         name="(tabs)"
         options={{
           headerTitle: 'Tabs',
           drawerLabel: 'Tabs',
-          headerShown:false,
+          headerShown: false,
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="border-bottom" size={size} color={color} />
           ),
@@ -30,6 +20,16 @@ const DrawerLayout = () => {
             <Link href="/modal" asChild>
               <HeaderButton />
             </Link>
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="index"
+        options={{
+          headerTitle: 'Home',
+          drawerLabel: 'Home',
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />

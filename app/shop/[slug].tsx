@@ -76,7 +76,7 @@ const ShopDetail = () => {
         </View>
 
         {/* View More Details */}
-        <TouchableOpacity onPress={handleOpenSheet} className="mb-10 items-center">
+        <TouchableOpacity onPress={()=>router.push(`/details/${slug}`)} className="mb-10 items-center">
           <Text className="text-gray-500">View More Details</Text>
         </TouchableOpacity>
       </ImageBackground>

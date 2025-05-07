@@ -65,7 +65,7 @@ export default function Home() {
       <View className="mx-3 my-2 flex px-4">
         <View className="my-3 flex flex-row items-center justify-between">
           <Text className="text-xl font-bold">Featured Salon</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => router.push(`/shop/gy` as never)}>
             <Text className="font-semibold text-primary">View All</Text>
           </TouchableOpacity>
         </View>
